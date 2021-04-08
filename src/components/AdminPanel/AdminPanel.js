@@ -17,7 +17,7 @@ const AdminPanel = () => {
     const [disableState, setDisableState] = useState(true);
     const [products, setProducts] = useState([]);
     useEffect(() =>{
-        const url = 'http://localhost:5000/allProduct'
+        const url = 'https://enigmatic-refuge-11397.herokuapp.com/allProduct'
         fetch(url)
         .then(res => res.json())
         .then(data => setProducts(data))
@@ -33,7 +33,7 @@ const AdminPanel = () => {
         }
         console.log(productData)
         if (productData.imageURL !== null) {
-            const url = 'http://localhost:5000/addProduct';
+            const url = 'https://enigmatic-refuge-11397.herokuapp.com/addProduct';
             fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

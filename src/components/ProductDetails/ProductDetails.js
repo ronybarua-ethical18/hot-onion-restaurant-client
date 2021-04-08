@@ -8,7 +8,7 @@ const ProductDetails = () => {
     const {productId} = useParams();
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/product/' + productId)
+        fetch('https://enigmatic-refuge-11397.herokuapp.com/product/' + productId)
             .then(res => res.json())
             .then(data => setProducts(data))
 

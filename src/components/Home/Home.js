@@ -7,7 +7,7 @@ import Lunch from '../Lunch/Lunch';
 const Home = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        const url = 'http://localhost:5000/allProduct'
+        const url = 'https://enigmatic-refuge-11397.herokuapp.com/allProduct'
         fetch(url)
             .then(res => res.json())
             .then(data => setProducts(data))
