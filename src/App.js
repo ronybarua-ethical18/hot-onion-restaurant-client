@@ -13,6 +13,7 @@ import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import PlaceOrder from "./components/PlaceOrder/PlaceOrder";
+import DeliveryProduct from "./components/DeliveryProduct/DeliveryProduct";
 export const UserContext = createContext();
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -36,6 +37,10 @@ function App() {
             <PrivateRoute path="/placeOrder">
               <Header loggedInUser={loggedInUser} />
               <PlaceOrder />
+            </PrivateRoute>
+            <PrivateRoute path="/deliveryProduct">
+              <Header loggedInUser={loggedInUser} />
+              <DeliveryProduct />
             </PrivateRoute>
             <Route path="/productDetails/:productId">
               <Header loggedInUser={loggedInUser} />

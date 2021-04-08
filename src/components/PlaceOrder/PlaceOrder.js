@@ -4,6 +4,7 @@ import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './PlaceOrder.css';
 import productImage from './banner.png';
+import { Link } from 'react-router-dom';
 const PlaceOrder = () => {
     const handleDecrease = () => {
         const QuantityInput = document.getElementById('orderAmount');
@@ -110,7 +111,7 @@ const PlaceOrder = () => {
                                 <p>Grand Total:</p>
                                 <b>$332</b>
                             </div>
-                            <Button variant="primary">Place Order</Button>
+                            <Link to="/deliveryProduct"><Button variant="primary">Place Order</Button></Link>
                         </div>
                     </div>
                 </div>
