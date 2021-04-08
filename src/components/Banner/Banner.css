@@ -1,0 +1,21 @@
+#banner{
+    height:500px;
+    width:auto;
+}
+.banner-area{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.banner-title{
+    font-weight:700;
+    font-size:45px;
+    text-transform: uppercase;
+}
+#book-table-btn{
+    border:transparent;
+    padding:12px 25px;
+    border-radius: 25px;
+    background-color:red;
+    color:white;
+    transition: all 0.3s ease-in-out;
+}

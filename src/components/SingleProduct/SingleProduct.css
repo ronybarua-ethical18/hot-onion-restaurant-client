@@ -1,0 +1,25 @@
+#single-image{
+    height:500px;
+}
+#product-gap{
+    margin-top: 100px;
+}
+#orderAmount{
+    border:none;
+    outline:none;
+    width:30px;
+    background:white;
+}
+.product-quantity{
+    border-radius:25px;
+}
+#plus, #minus{
+    outline:none;
+    border:none;
+    background:transparent;
+    padding: 0px 15px;
+}
+#plus:focus{
+    outline:none;
+    border:none;
+}

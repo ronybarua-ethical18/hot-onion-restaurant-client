@@ -1,0 +1,13 @@
+#placeOrder{
+    margin-top: 100px;
+}
+#productImg{
+    height:150px;
+}
+.orderReview{
+    border-radius:25px;
+}
+.orderedProduct{
+    border-radius:25px;
+    padding:10px;
+}

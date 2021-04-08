@@ -1,0 +1,14 @@
+#brand-image{
+    width:200px;
+}
+#sign-up-btn{
+    background-color:red;
+    color:#fff;
+    border: transparent;
+    border-radius: 25px;
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+}
+.nav-link{
+    color:#000;
+}
