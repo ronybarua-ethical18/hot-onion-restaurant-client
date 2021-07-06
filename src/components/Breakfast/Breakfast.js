@@ -12,7 +12,7 @@ const Breakfast = (props) => {
     return (
         <div className="h-100 pb-4">
             <Card onClick={() => handleClick(_id)} className="shadow mb-4 p-3 border-0 h-100" id="card-radius">
-                <Card.Img variant="top" src={imageURL} id="product-image" />
+                <Card.Img variant="top" className="center-block" src={imageURL} id="product-image" />
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>
                     <Card.Text>

@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Row, Tab, Tabs } from 'react-bootstrap';
+import AboutUs from '../AboutUs/AboutUs';
 import Breakfast from '../Breakfast/Breakfast';
+import ChefTeams from '../ChefTeams/ChefTeams';
+import ClientReviews from '../ClientReviews/ClientReviews';
+import ContactForm from '../ContactForm/ContactForm';
 import Dinner from '../Dinner/Dinner';
 import Lunch from '../Lunch/Lunch';
+import Services from '../Services/Services';
+import './Home.css'
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -38,6 +44,24 @@ const Home = () => {
                     </Row>
                 </Tab>
             </Tabs>
+            <div>
+                <Services />
+            </div>
+            <div>
+                <AboutUs />
+            </div>
+            <div>
+                <ChefTeams />
+            </div>
+            <div>
+               <ClientReviews />
+            </div>
+            <div>
+               <ContactForm />
+            </div>
+            {/* <div>
+               <FooterSection />
+            </div> */}
         </div>
     );
 };

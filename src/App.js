@@ -14,6 +14,7 @@ import Login from "./components/Login/Login";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import PlaceOrder from "./components/PlaceOrder/PlaceOrder";
 import DeliveryProduct from "./components/DeliveryProduct/DeliveryProduct";
+import FooterSection from "./components/FooterSection/FooterSection";
 export const UserContext = createContext();
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -26,6 +27,13 @@ function App() {
               <Header loggedInUser={loggedInUser} />
               <Banner />
               <Home />
+              <FooterSection />
+            </Route>
+            <Route path="/">
+              <Header loggedInUser={loggedInUser} />
+              <Banner />
+              <Home />
+              <FooterSection />
             </Route>
             <Route path="/login">
               <Header loggedInUser={loggedInUser} />
