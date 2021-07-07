@@ -55,7 +55,7 @@ const ClientReviews = () => {
     return (
         <div className="container common-margin">
             <div className="heading mb-5">
-                <label htmlFor="">OUR CLIENT REVIEWS</label>
+                <label htmlFor="" className="label-styling">OUR CLIENT REVIEWS</label>
             </div>
             <div className="carousel-styles text-left">
                 <Carousel {...carouselParams}>

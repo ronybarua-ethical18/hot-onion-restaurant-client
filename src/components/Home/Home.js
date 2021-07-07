@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Row, Tab, Tabs } from 'react-bootstrap';
 import AboutUs from '../AboutUs/AboutUs';
+import Banner from '../Banner/Banner';
 import Breakfast from '../Breakfast/Breakfast';
 import ChefTeams from '../ChefTeams/ChefTeams';
 import ClientReviews from '../ClientReviews/ClientReviews';
@@ -21,47 +22,46 @@ const Home = () => {
     console.log(products);
     return (
         <div className="text-center container">
-            <Tabs defaultActiveKey="breakfast" className="d-flex justify-content-center border-0" >
-                <Tab eventKey="breakfast" title="Breakfast">
-                    <Row className = "mt-5">
-                        {
-                            products.filter(product => product.productType === 'Breakfast').map(filteredProduct =><Col lg={4} md={6} sm={6} xs={12}><Breakfast product={filteredProduct}></Breakfast></Col>)
-                        }
-                    </Row>
-                </Tab>
-                <Tab eventKey="lunch" title="Lunch">
-                    <Row className = "mt-5">
-                        {
-                            products.filter(product => product.productType === 'Lunch').map(filteredProduct =><Col lg={4} md={6} sm={6} xs={12}><Lunch product={filteredProduct}></Lunch></Col>)
-                        }
-                    </Row>
-                </Tab>
-                <Tab eventKey="dinner" title="Dinner">
-                    <Row className = "mt-5">
-                        {
-                            products.filter(product => product.productType === 'Dinner').map(filteredProduct => <Col lg={4} md={6} sm={6} xs={12}><Dinner product={filteredProduct}></Dinner></Col>)
-                        }
-                    </Row>
-                </Tab>
-            </Tabs>
-            <div>
+            <div id="product">
+                <Tabs defaultActiveKey="breakfast" id="product" className="d-flex justify-content-center border-0" >
+                    <Tab eventKey="breakfast" title="Breakfast">
+                        <Row className = "mt-5">
+                            {
+                                products.filter(product => product.productType === 'Breakfast').map(filteredProduct =><Col lg={4} md={6} sm={6} xs={12}><Breakfast product={filteredProduct}></Breakfast></Col>)
+                            }
+                        </Row>
+                    </Tab>
+                    <Tab eventKey="lunch" title="Lunch">
+                        <Row className = "mt-5">
+                            {
+                                products.filter(product => product.productType === 'Lunch').map(filteredProduct =><Col lg={4} md={6} sm={6} xs={12}><Lunch product={filteredProduct}></Lunch></Col>)
+                            }
+                        </Row>
+                    </Tab>
+                    <Tab eventKey="dinner" title="Dinner">
+                        <Row className = "mt-5">
+                            {
+                                products.filter(product => product.productType === 'Dinner').map(filteredProduct => <Col lg={4} md={6} sm={6} xs={12}><Dinner product={filteredProduct}></Dinner></Col>)
+                            }
+                        </Row>
+                    </Tab>
+                </Tabs>
+            </div>
+            <div id="service">
                 <Services />
             </div>
-            <div>
+            <div id="about">
                 <AboutUs />
             </div>
-            <div>
+            <div id="chef">
                 <ChefTeams />
             </div>
-            <div>
+            <div id="reviews">
                <ClientReviews />
             </div>
-            <div>
+            <div id="contact">
                <ContactForm />
             </div>
-            {/* <div>
-               <FooterSection />
-            </div> */}
         </div>
     );
 };

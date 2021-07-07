@@ -6,7 +6,7 @@ const FooterSection = () => {
         <div className="common-margin bg-danger text-white">
             <div className="w-100 m-auto">
                 <div className="row m-0 p-5">
-                    <div className="col-md-3">
+                    <div className="col-md-3 mb-4">
                         <h2><strong>Red Onion</strong></h2>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, adipisci.</p>
                         <strong>+800-0XXXX97655</strong>

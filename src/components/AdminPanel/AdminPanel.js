@@ -67,9 +67,9 @@ const AdminPanel = () => {
             });
     }
     return (
-        <div className="mainPanel">
+        <div className="">
             <div className="row no-gutters">
-                <div className="col-md-3 text-center mainPanel bg-white pt-3">
+                <div className="col-md-3 mainPanel text-center bg-white pt-3" id="mainPanel">
                     <img src={logo} className="img-fluid brand-logo" alt="" />
                     <div className="actions mt-5 text-left">
                         <div className="p-3 m-5">
@@ -86,12 +86,12 @@ const AdminPanel = () => {
                     </div>
                 </div>
                 <div className="col-md-9" id="mainPanel">
-                    <div className="p-3 bg-white">
+                    <div className="p-3" >
                         {
                             !navigation ? <h2 id="title"><span>Add</span> Product</h2> : <h2 id="title"><span>Manage</span> Product</h2>
                         }
                     </div>
-                    <div id="manage-table" className="manage-product">
+                    <div id="manage-table" className="manage-product mt-5">
                         {
                             navigation && <Table striped bordered hover size="sm" className=" shadow">
                                 <thead>

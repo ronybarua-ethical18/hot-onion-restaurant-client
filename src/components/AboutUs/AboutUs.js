@@ -6,14 +6,14 @@ const AboutUs = () => {
     return (
         <div className="container  common-margin">
             <div className="heading mb-5">
-                <label htmlFor="">SOME WORDS ABOUT US</label>
+                <label htmlFor="" className="label-styling">SOME WORDS ABOUT US</label>
             </div>
             <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-6 mb-4">
                     <img src={chef} className="img-fluid" alt="" />
                 </div>
                 <div className="col-md-6 text-left">
-                    <h2 className="mb-3">Welcome to know about us</h2>
+                    <h2 className="mb-3 text-success">Welcome to know about us</h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus nam saepe laboriosam explicabo sunt esse veritatis voluptate aliquid eligendi odio perspiciatis vitae quisquam eius, cupiditate magnam dignissimos iure velit hic! Hic obcaecati, fugiat qui facere fuga autem natus nobis? Saepe, esse? Incidunt nam sunt, tempore repellendus </p>
                     <p>veniam explicabo neque itaque possimus odit voluptates amet quo sapiente cumque quidem consequuntur temporibus? Id cumque earum nihil, assumenda obcaecati repellat ea vel placeat quisquam dolorem a, consequatur deserunt illum? </p>
 

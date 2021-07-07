@@ -3,7 +3,7 @@
 }
 #mainPanel{ 
     height:100vh;
-    width:100%;   
+    overflow:scroll;  
 }
 .form-event{
     background-color:aliceblue;
@@ -19,6 +19,8 @@
 }
 #title{
     font-weight: 700;
+    position:fixed;
+    width:100%;
 }
 span{
     color:red;

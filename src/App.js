@@ -21,15 +21,9 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
-        <Router>
+      <Router>
           <Switch>
             <Route path="/home">
-              <Header loggedInUser={loggedInUser} />
-              <Banner />
-              <Home />
-              <FooterSection />
-            </Route>
-            <Route path="/">
               <Header loggedInUser={loggedInUser} />
               <Banner />
               <Home />
@@ -58,6 +52,7 @@ function App() {
               <Header loggedInUser={loggedInUser} />
               <Banner />
               <Home />
+              <FooterSection />
             </Route>
           </Switch>
         </Router>

@@ -5,7 +5,7 @@ const ContactForm = () => {
     return (
         <div className="container common-margin">
             <div className="heading mb-5">
-                <label htmlFor="">GET IN TOUCH</label>
+                <label htmlFor="" className="label-styling">GET IN TOUCH</label>
             </div>
             <div className="row">
                 <div className="col-md-8 offset-md-2 shadow p-5">

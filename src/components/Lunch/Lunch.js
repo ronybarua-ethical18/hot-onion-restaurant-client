@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import './Lunch.css'
 const Lunch = (props) => {
@@ -18,9 +18,14 @@ const Lunch = (props) => {
                     <Card.Title>{name}</Card.Title>
                     <Card.Text>
                         <p>The most delicious food</p>
-                        <h3><b>${price}</b></h3>
                     </Card.Text>
+                    <div className="">
+                        <Button className="w-100 bg-success" id="book-table-btn">Add to Cart</Button>
+                    </div>
                 </Card.Body>
+                <div id="price-overlay">
+                    <b>${price}</b>
+                </div>
             </Card>
         </div>
     );

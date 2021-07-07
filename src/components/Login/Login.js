@@ -1,73 +1,130 @@
-import React from 'react';
-import './Login.css';
-import logo from './logo.png';
-import { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../../App';
-import firebase from "firebase/app";
 import "firebase/auth";
-import firebaseConfig from './firebase.config';
+import {
+    createUserWithEmailAndPassword,
+    handleGoogleSignIn,
+    initializeFirebase,
+    signInWithEmailAndPassword
+} from './LoginManager';
+import { Button, Form } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
+import './Login.css';
+import loginPhoto from '../../images/chef2.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { Button } from 'react-bootstrap';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 const Login = () => {
+    initializeFirebase();
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [user, setUser] = useState({
+        isSignedIn: false,
+        name: '',
+        email: '',
+        error: '',
+        password: '',
+        success: false
+    });
+    console.log(user)
+    const [newUser, setNewUser] = useState(false);
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    // firebase initialization 
-    if (firebase.apps.length === 0) {
-        firebase.initializeApp(firebaseConfig);
-    }
     let history = useHistory();
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
 
     const handleResponse = (res, redirect) => {
         setLoggedInUser(res);
+        setUser(res);
+
         if (redirect) {
             history.replace(from);
         }
     }
-    // google login
-    const handleGoogleSignIn = () => {
-        var provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth()
-            .signInWithPopup(provider)
-            .then((result) => {
-                /** @type {firebase.auth.OAuthCredential} */
-                var user = result.user;
-                handleResponse(user, true);
-            }).catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                var email = error.email;
-                console.log(errorCode, errorMessage, email);
-            });
+    const googleSignIn = () => {
+        handleGoogleSignIn()
+            .then(res => {
+                handleResponse(res, true)
+            })
+    }
+    const handleBlur = (event) => {
+        let isFormValid = true;
+        if (event.target.name === 'email') {
+            isFormValid = /\S+@\S+\.\S+/.test(event.target.value);
+            if (!isFormValid) {
+                setEmailError('Enter valid email')
+            }
+            else {
+                setEmailError('');
+            }
+        }
+        if (event.target.name === 'password') {
+            const passwordLength = event.target.value.length > 6;
+            const hasNumber = /\d{1}/.test(event.target.value);
+            isFormValid = passwordLength && hasNumber;
+            if (!isFormValid) {
+                setPasswordError('Password should have number and letters and length must be greater than 6');
+            }
+            else {
+                setPasswordError('');
+            }
+            console.log(isFormValid);
+        }
+        if (isFormValid) {
+            const newUserInfo = { ...user };
+            newUserInfo[event.target.name] = event.target.value;
+            setUser(newUserInfo);
+        }
+    }
+    const handleSubmit = (event) => {
+        if (newUser && user.email && user.password) {
+            createUserWithEmailAndPassword(user.name, user.email, user.password)
+                .then(res => {
+                    handleResponse(res, true)
+                    setUser(res);
+                })
+        }
+        if (!newUser && user.email && user.password) {
+            signInWithEmailAndPassword(user.email, user.password)
+                .then(res => {
+                    handleResponse(res, true)
+                    console.log(res.error)
+                })
+        }
+        event.preventDefault();
     }
     return (
-        <div className="row d-flex justify-content-center align-items-center no-gutters">
-            <div className="col-md-4 col-md-offset-4">
-                <div className="login-div">
-                    <div className="logo text-center"><img src={logo} className="img-fluid" alt="" /></div>
-                    <div className="title">Red Onion</div>
-                    <div className="sub-title">Login</div>
-                    <div className="fields">
-                        <div className="username">
-                            <input type="text" className="user-input" placeholder="user name" name="" id="userName" />
-                        </div>
-                        <div className="password">
-                            <input type="password" className="pass-input" placeholder="password" name="" id="userPass" />
-                        </div>
-                    </div>
-                    <button className="signin-button">Login</button>
-                    <div className="link">
-                        <a href="/" className="mr-2">Forgot Password? or</a>
-                        <a href="/">Sign Up</a>
-                    </div>
-                    <div className="social-login d-flex justify-content-center">
-                        <FontAwesomeIcon onClick={handleGoogleSignIn} icon={faGoogle} className="fa-2x text-danger"></FontAwesomeIcon>
-                        <FontAwesomeIcon onClick={handleGoogleSignIn} icon={faFacebook} className="mr-3 ml-3 fa-2x text-danger"></FontAwesomeIcon>
-                        <FontAwesomeIcon onClick={handleGoogleSignIn} icon={faGithub} className="fa-2x text-danger"></FontAwesomeIcon>
-                    </div>
-
+        <div className="container d-flex align-items-center" id="loginPage">
+            <div className="row">
+                <div className="col-md-6">
+                    <img src={loginPhoto} className="img-fluid" alt="" />
+                </div>
+                <div id="headerMain" className="col-md-6 d-flex align-items-center p-4 justify-content-center">
+                    <Form className="w-100 shadow p-4" onSubmit={handleSubmit}>
+                        {newUser && <Form.Group controlId="formBasicName">
+                            <Form.Label><span className="">Name</span></Form.Label>
+                            <Form.Control name="name" onBlur={handleBlur} type="text" placeholder="Name" />
+                        </Form.Group>}
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label><span className="">Email address</span></Form.Label>
+                            <Form.Control onChange={handleBlur} name="email" type="email" placeholder="Enter email" />
+                        </Form.Group>
+                        <p className="text-danger">{emailError}</p>
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label><span className="">Password</span></Form.Label>
+                            <Form.Control onChange={handleBlur} name="password" type="password" placeholder="Password" />
+                        </Form.Group>
+                        <p className="text-danger">{passwordError}</p>
+                        <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check onChange={() => setNewUser(!newUser)} name="newUser" type="checkbox" label="Sign Up if you are new here" />
+                        </Form.Group>
+                        <p style={{ color: 'red' }}>{loggedInUser.error}</p>
+                        <button id="book-table-btn">
+                        {newUser ? 'Sign Up' : 'Sign In'}
+                        </button>
+                        <Button id="book-table-btn" onClick={googleSignIn}>
+                            <FontAwesomeIcon icon={faGoogle} className="mr-2"></FontAwesomeIcon>Login with Google
+                        </Button>
+                    </Form>
                 </div>
             </div>
         </div>
@@ -75,3 +132,4 @@ const Login = () => {
 };
 
 export default Login;
+   

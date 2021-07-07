@@ -4,7 +4,7 @@ import banner from './banner.png';
 import './Banner.css'
 const Banner = () => {
     return (
-        <div className="container banner-area">
+        <div className="container banner-area text-left" id="home">
             <div className="row d-flex align-items-center">
                 <div className="col-md-6">
                     <h2 className="banner-title">You wanna try our fresh delicious foods?</h2>
