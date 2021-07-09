@@ -14,7 +14,7 @@ const ChefTeams = () => {
                 {
                     chefData.map(chef => <div className="col-md-4 mb-4">
                         <Card className="mb-4 border-0 h-100 shadow" id="card-radius">
-                            <div className="d-flex justify-content-center align-items-center"><Card.Img variant="top" className="service_image" src={chef.img} /></div>
+                            <div className="d-flex justify-content-center align-items-center"><img variant="top" className="service_image" src={chef.img} alt="" /></div>
                             <Card.Body>
                                 <Card.Title><h3 className="text-center text-success"><strong>{chef.name}</strong></h3></Card.Title>
                                 <Card.Text> 

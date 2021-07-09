@@ -10,3 +10,13 @@
     border-top-right-radius: 25px;
     background:red;
 }
+#product-overlay{
+    position: absolute;
+    top:0;
+    right: 0;
+    padding: 12px 15px;
+    color:#000;
+}
+.icon{
+    cursor:pointer;
+}

@@ -2,7 +2,8 @@ import { createContext, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 import './App.css';
@@ -15,13 +16,16 @@ import ProductDetails from "./components/ProductDetails/ProductDetails";
 import PlaceOrder from "./components/PlaceOrder/PlaceOrder";
 import DeliveryProduct from "./components/DeliveryProduct/DeliveryProduct";
 import FooterSection from "./components/FooterSection/FooterSection";
+import Cart from "./components/Cart/Cart";
+import { connect } from 'react-redux';
 export const UserContext = createContext();
-function App() {
+
+function App({ currentItem }) {
   const [loggedInUser, setLoggedInUser] = useState({});
   return (
     <div className="App">
       <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
-      <Router>
+        <Router>
           <Switch>
             <Route path="/home">
               <Header loggedInUser={loggedInUser} />
@@ -29,10 +33,17 @@ function App() {
               <Home />
               <FooterSection />
             </Route>
-            <Route path="/login">
-              <Header loggedInUser={loggedInUser} />
-              <Login />
-            </Route>
+            <Route
+                exact
+                path="/"
+                render={() => {
+                    return (
+                      loggedInUser.email ?
+                      <Redirect to="/admin" /> :
+                      <Redirect to="/home" /> 
+                    )
+                }}
+              />
             <PrivateRoute path="/admin">
               <AdminPanel />
             </PrivateRoute>
@@ -44,16 +55,20 @@ function App() {
               <Header loggedInUser={loggedInUser} />
               <DeliveryProduct />
             </PrivateRoute>
-            <Route path="/productDetails/:productId">
-              <Header loggedInUser={loggedInUser} />
-              <ProductDetails />
-            </Route>
-            <Route path="/">
-              <Header loggedInUser={loggedInUser} />
-              <Banner />
-              <Home />
-              <FooterSection />
-            </Route>
+            {!currentItem ?
+              (<Redirect to="/home" />) :
+              <Route path="/productDetails/:productId">
+                <Header loggedInUser={loggedInUser} />
+                <ProductDetails />
+              </Route>
+            }
+            <PrivateRoute path="/cart">
+              <Cart />
+            </PrivateRoute>
+            <Route path="/login">
+                <Header loggedInUser={loggedInUser} />
+               <Login />
+              </Route>
           </Switch>
         </Router>
       </UserContext.Provider>
@@ -61,4 +76,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    currentItem: state.shop.currentItem
+  }
+}
+
+export default connect(mapStateToProps)(App);

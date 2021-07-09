@@ -10,7 +10,7 @@ import {
 import { Button, Form } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
 import './Login.css';
-import loginPhoto from '../../images/chef2.jpg'
+import loginPhoto from '../../images/chefs.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 const Login = () => {
@@ -94,11 +94,11 @@ const Login = () => {
     }
     return (
         <div className="container d-flex align-items-center" id="loginPage">
-            <div className="row">
+            <div className="row w-100">
                 <div className="col-md-6">
                     <img src={loginPhoto} className="img-fluid" alt="" />
                 </div>
-                <div id="headerMain" className="col-md-6 d-flex align-items-center p-4 justify-content-center">
+                <div id="headerMain" className="col-md-6">
                     <Form className="w-100 shadow p-4" onSubmit={handleSubmit}>
                         {newUser && <Form.Group controlId="formBasicName">
                             <Form.Label><span className="">Name</span></Form.Label>

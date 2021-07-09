@@ -7,8 +7,8 @@ const ButtonGroup = ({next, previous}) => {
     return (
         <div className="container d-flex justify-content-center">
             
-            <Button onClick={previous} className="mr-3"><FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon></Button>
-            <Button onClick={next}><FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon></Button>
+            <Button onClick={previous}  className="mr-3 btn-danger"><FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon></Button>
+            <Button onClick={next} className="btn-danger"><FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon></Button>
         </div>
     );
 };

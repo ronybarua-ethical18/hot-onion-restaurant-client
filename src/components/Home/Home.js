@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Col, Row, Tab, Tabs } from 'react-bootstrap';
 import AboutUs from '../AboutUs/AboutUs';
-import Banner from '../Banner/Banner';
 import Breakfast from '../Breakfast/Breakfast';
 import ChefTeams from '../ChefTeams/ChefTeams';
 import ClientReviews from '../ClientReviews/ClientReviews';
@@ -10,16 +9,15 @@ import Dinner from '../Dinner/Dinner';
 import Lunch from '../Lunch/Lunch';
 import Services from '../Services/Services';
 import './Home.css'
+import { fetchProductData } from '../../redux/Shopping/shopping-actions'
+import { connect } from 'react-redux';
 
-const Home = () => {
-    const [products, setProducts] = useState([]);
-    useEffect(() => {
-        const url = 'https://enigmatic-refuge-11397.herokuapp.com/allProduct'
-        fetch(url)
-            .then(res => res.json())
-            .then(data => setProducts(data))
+const Home = ({ products, fetchProductData }) => {
+
+    useEffect(() =>{
+        fetchProductData()
     }, [])
-    console.log(products);
+
     return (
         <div className="text-center container">
             <div id="product">
@@ -27,21 +25,21 @@ const Home = () => {
                     <Tab eventKey="breakfast" title="Breakfast">
                         <Row className = "mt-5">
                             {
-                                products.filter(product => product.productType === 'Breakfast').map(filteredProduct =><Col lg={4} md={6} sm={6} xs={12}><Breakfast product={filteredProduct}></Breakfast></Col>)
+                                products.filter(product => product.productType === 'Breakfast').map(filteredProduct =><Col lg={4} md={6} sm={6} xs={12}><Breakfast key={filteredProduct.id} product={filteredProduct}></Breakfast></Col>)
                             }
                         </Row>
                     </Tab>
                     <Tab eventKey="lunch" title="Lunch">
                         <Row className = "mt-5">
                             {
-                                products.filter(product => product.productType === 'Lunch').map(filteredProduct =><Col lg={4} md={6} sm={6} xs={12}><Lunch product={filteredProduct}></Lunch></Col>)
+                                products.filter(product => product.productType === 'Lunch').map(filteredProduct =><Col lg={4} md={6} sm={6} xs={12}><Lunch key={filteredProduct.id} product={filteredProduct}></Lunch></Col>)
                             }
                         </Row>
                     </Tab>
                     <Tab eventKey="dinner" title="Dinner">
                         <Row className = "mt-5">
                             {
-                                products.filter(product => product.productType === 'Dinner').map(filteredProduct => <Col lg={4} md={6} sm={6} xs={12}><Dinner product={filteredProduct}></Dinner></Col>)
+                                products.filter(product => product.productType === 'Dinner').map(filteredProduct => <Col lg={4} md={6} sm={6} xs={12}><Dinner key={filteredProduct.id} product={filteredProduct}></Dinner></Col>)
                             }
                         </Row>
                     </Tab>
@@ -66,4 +64,16 @@ const Home = () => {
     );
 };
 
-export default Home;
+const mapStateToProps = (state) =>{
+    return{
+        products: state.shop.products
+    }
+}
+
+const mapDispatchToProps = dispatch =>{
+    return{
+        fetchProductData: () => dispatch(fetchProductData())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
